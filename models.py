@@ -14,6 +14,9 @@ class Movies(Base):
     link = Column(String, unique=True)
 
     #relationships
+    # example: items = relationship("Item", back_populates="owner")
+    peopleR0 = relationship("People", back_populates="moviesR0")
+    reviewsR0 = relationship("Reviews", back_populates="moviesR1")
 
 class People(Base):
     __tablename__ = "people"
@@ -22,6 +25,8 @@ class People(Base):
     name = Column(String)
 
     #relationships
+    moviesR0 = relationship("Movies", back_populates="peopleR0")
+    jobsR0 = relationship("Jobs", back_populates="peopleR1")
 
 class Jobs(Base):
     __tablename__ = "jobs"
@@ -30,6 +35,7 @@ class Jobs(Base):
     jobTitle= Column(String)
 
     #relationships
+    peopleR1 = relationship("People", back_populates="jobsR0")
 
 class MoviesPeople(Base):
     __tablename__ = "moviesPeople"
@@ -56,6 +62,7 @@ class Tags(Base):
     tag = Column(String)
 
     #relationships
+    reviewsR1 = relationship("Reviews", back_populates="tagsR0")
 
 class Reviews(Base):
     __tablename__ = "reviews"
@@ -68,3 +75,5 @@ class Reviews(Base):
     rating = Column(Integer)
 
     #relationships
+    moviesR1 = relationship("Movies", back_populates="reviewsR0")
+    tagsR0 = relationship("Tags", back_populates="reviewsR1")
