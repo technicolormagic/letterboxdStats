@@ -56,7 +56,7 @@ class Watched(Base):
     #relationships
 
 class Tags(Base):
-    _tablename__ = "tags"
+    __tablename__ = "tags"
 
     id = Column(Integer, primary_key=True)
     tag = Column(String)
@@ -69,7 +69,7 @@ class Reviews(Base):
 
     id = Column(Integer, primary_key=True)
     movieId = Column(Integer, ForeignKey(Movies.id))
-    tagId = Column(Integer, ForeignKey(Tag.id))
+    tagId = Column(Integer, ForeignKey(Tags.id))
     review = Column(String)
     date = Column(Date)
     rating = Column(Integer)
