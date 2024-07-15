@@ -8,7 +8,7 @@ class Movies(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String)
-    releaseData = Column(Date)
+    releaseDate = Column(Date)
     country = Column(String)
     language = Column(String)
     link = Column(String, unique=True)
@@ -17,6 +17,15 @@ class Movies(Base):
     # example: items = relationship("Item", back_populates="owner")
     peopleR0 = relationship("People", back_populates="moviesR0")
     reviewsR0 = relationship("Reviews", back_populates="moviesR1")
+
+class Jobs(Base):
+    __tablename__ = "jobs"
+
+    id = Column(Integer, primary_key=True)
+    jobTitle= Column(String)
+
+    #relationships
+    peopleR1 = relationship("People", back_populates="jobsR0")
 
 class People(Base):
     __tablename__ = "people"
@@ -27,15 +36,6 @@ class People(Base):
     #relationships
     moviesR0 = relationship("Movies", back_populates="peopleR0")
     jobsR0 = relationship("Jobs", back_populates="peopleR1")
-
-class Jobs(Base):
-    __tablename__ = "jobs"
-
-    id = Column(Integer, primary_key=True)
-    jobTitle= Column(String)
-
-    #relationships
-    peopleR1 = relationship("People", back_populates="jobsR0")
 
 class MoviesPeople(Base):
     __tablename__ = "moviesPeople"
